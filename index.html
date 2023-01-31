@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Clone Ngl | Shayhan Sagufta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5 justify-content-center">
+        <div class="col-md-4">
+          <!-- Card1 -->
+          <div class="card" style="">
+            <div class="card-body">
+              <p class="card-text text-center"><a class="text-dark" href="https://www.instagram.com/sayhan_sagufta23/">@sayhan_sagufta23</a></p>
+              <p class="fw-bold text-center">kirimi aku pesan anonim!</p>
+            </div>
+            <!-- Card2 -->
+            <div class="card bg-card">
+              <div class="card-body">
+                <!-- Alert -->
+                <div class="alert d-none alert-success alert-dismissible fade show my-alert" role="alert">
+                  <strong>Terima Kasih!</strong> Pesan Anda Sudah Kami Terima
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- Akhir Alert -->
+                <!-- Form -->
+                <form name="wpu-contact-form">
+                  <div class="form-group mb-3">
+                    <label for="name" class="form-label">Nama</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="name" name="nama" placeholder="anonim" />
+                  </div>
+
+                  <!-- <div class="form-group">
+                      <label for="email" class="form-label">Email </label>
+                      <input type="email" class="form-control" id="email" aria-describedby="email" />
+                    </div> -->
+
+                  <div class="form-group mb-3">
+                    <label for="pesan">Pesan</label>
+                    <textarea class="form-control" id="pesan" rows="3" name="pesan" placeholder="kirim pesan anonim padaku..."></textarea>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-dark btn-kirim" type="submit">Kirim!</button>
+                    <!-- Btn Loading -->
+                    <button class="btn btn-dark btn-loading d-none" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Loading...
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Akhir form -->
+
+        <!-- Pesan Text -->
+        <p class="text-white text-center mt-2"><i class="bi bi-lock"></i> tanya-jawab anonim</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <!-- Sript Web App -->
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwZaIA54qPgFal7dgKNMgWBRf9r0Ltc4ZtQmhlRUMgLl_hCC4oTjqyDIc4cH1bNxKiNEw/exec";
+      const form = document.forms["wpu-contact-form"];
+      const btnKirim = document.querySelector(".btn-kirim");
+      const btnLoading = document.querySelector(".btn-loading");
+      const myAlert = document.querySelector(".my-alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // ketika tombol submit diklik
+        // tampilkan tombol loading hilangkan tombol kirim
+        btnLoading.classList.toggle("d-none");
+        btnKirim.classList.toggle("d-none");
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            // tampilkan tombol kirim, hilangkan tombol loading
+            btnLoading.classList.toggle("d-none");
+            btnKirim.classList.toggle("d-none");
+            // tampilkan alert
+            myAlert.classList.toggle("d-none");
+            // reset form
+            form.reset();
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
